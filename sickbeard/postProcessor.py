@@ -697,9 +697,12 @@ class PostProcessor(object):
         
         self._log(u"Processing "+self.file_path+" ("+str(self.nzb_name)+")")
         
-        if os.path.isdir( self.file_path ):
-            self._log(u"File "+self.file_path+" seems to be a directory")
-            return False
+        try:
+            if os.path.isdir( self.file_path ):
+                self._log(u"File "+self.file_path+" seems to be a directory")
+                return False
+        except:
+                return False
         for ignore_file in self.IGNORED_FILESTRINGS:
             if ignore_file in self.file_path:
                 self._log(u"File "+self.file_path+" is ignored type, skipping" )
